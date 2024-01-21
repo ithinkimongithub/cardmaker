@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Speller</title>
+    <title>carder</title>
 </head>
 <style>
     table, th, td{
@@ -14,8 +14,24 @@
     }
 </style>
 <body>
-    <h1>Speller 4m</h1>
-    <p id="test"></p>
+    <h1>header</h1>
+    <p id="test">make cards based on outline style input of .xlsx</p>
+    Input file: <input type="file" onchange="openXLSX()" accept=".xlsx">
+    <p id="pstatus">status:</p>
 </body>
-
 </html>
+<script>
+function sendstatus(text){
+    document.getElementById("pstatus").text += text;
+}
+function openXLSX(){
+    var file = event.target.files[0];
+    var reader = new FileReader();
+    reader.onload = function(event){
+        var data = event.target.result;
+        var workbook = XLSX.read(data, {type: 'binary'});
+        console.log("workbook read");
+    };
+    reader.readAsBinaryString(file);
+}
+</script>
