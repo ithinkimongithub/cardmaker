@@ -33,11 +33,17 @@ function openXLSX(){
         console.log("workbook read");
         var sheet1 = workbook.Sheets[workbook.SheetNames[0]];
         var cellobject;
-        for(var c = 0; c < 20; c++){
-            for(var r = 0; r < 100; r++){
+        for(var r = 0; r < 100; r++){
+            for(var c = 0; c < 20; c++){
                 cellobject = XLSX.utils.sheet_get_cell(sheet1,r,c);
                 if(cellobject.t != 'z'){
                     sendstatus(cellobject.v);
+                    if(c==0){
+                        sendstatus("page number is");
+                        sendstatus(cellobject.v);
+                    }
+                    if(c==1){
+                        
                 }
             }
         }
