@@ -33,17 +33,27 @@ function openXLSX(){
         console.log("workbook read");
         var sheet1 = workbook.Sheets[workbook.SheetNames[0]];
         var cellobject;
-        for(var r = 0; r < 100; r++){
-            for(var c = 0; c < 20; c++){
+        var onleft 
+        for(var r = 0; r < 100; r++){ //for now, just rows.
+            for(var c = 0; c < 10; c++){
                 cellobject = XLSX.utils.sheet_get_cell(sheet1,r,c);
                 if(cellobject.t != 'z'){
                     sendstatus(cellobject.v);
-                    if(c==0){
-                        sendstatus("page number is");
-                        sendstatus(cellobject.v);
+                    if(c == 1 && cellobject.v == "Page"){
+                        var pageshort = XLSX.utils.sheet_get_cell(sheet1,r,c+1);
+                        var pagelong  = XLSX.utils.sheet_get_cell(sheet1,r,c+3);
+                        var pagerisk  = XLSX.utils.sheet_get_cell(sheet1,r,c+5);
+                        console.log("hit title line");
                     }
-                    if(c==1){
-                        
+                    else if(c==1 && cellobject.v == "FullHeader"){
+                        var fheader = XLSX.utils.sheet_get_cell(sheet1,r,c+1);
+                    }
+                    else if(cellobject.v == "Step"){
+                        var stepobj = XLSX.utils.sheet_get_cell(sheet1,r,c+1);
+                    }
+                    else if(c==1 && cellobject.v == "Right"){
+
+                    }
                 }
             }
         }
